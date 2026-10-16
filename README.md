@@ -11,6 +11,17 @@ servicios de Azure AI Foundry. El mapeo a la arquitectura destino está en
 [PLAN-IMPLEMENTACION.md](PLAN-IMPLEMENTACION.md) y el diseño en
 [ARQUITECTURA.md](ARQUITECTURA.md).
 
+## Demo en vivo (GitHub Pages)
+
+**https://cdinapol.github.io/SBS-RentasHospitalarias/**
+
+El frontend corre de forma autónoma: en GitHub Pages usa un **modo demo in-browser** que
+ejecuta el mismo pipeline de 3 agentes portado a TypeScript (sin backend). El badge del
+encabezado indica el modo activo:
+
+- **Demo in-browser**: datos y pipeline en el navegador (GitHub Pages, o `?demo=1` en local).
+- **Local (API)**: consume el backend FastAPI (por defecto en `localhost`; forzar con `?live`).
+
 ## Estructura
 
 ```
