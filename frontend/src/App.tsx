@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { api, type Filtros } from "./api";
+import { api, MODE_LABEL, type Filtros } from "./api";
 import { DECISION_COLOR, DECISION_LABEL, money } from "./constants";
 import ReclamacionDetail from "./ReclamacionDetail";
 import ArquitecturaTab from "./ArquitecturaTab";
@@ -55,7 +55,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <span className="badge-modo">Prototipo local</span>
+          <span className="badge-modo">{MODE_LABEL}</span>
           <button className="btn" onClick={reset}>
             Reiniciar datos
           </button>

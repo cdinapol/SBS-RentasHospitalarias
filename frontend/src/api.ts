@@ -4,8 +4,22 @@ import type {
   KPIs,
   Reclamacion,
 } from "./types";
+import { demoStore } from "./demo/store";
 
 const BASE = "/api";
+
+export interface Filtros {
+  estado?: string;
+  decision?: string;
+  analista?: string;
+  q?: string;
+}
+
+// Modo demo (sin backend): activo en GitHub Pages o con ?demo=1. En localhost usa el backend.
+const params = new URLSearchParams(location.search);
+const isLocalhost = ["localhost", "127.0.0.1"].includes(location.hostname);
+export const DEMO = params.has("demo") || (!isLocalhost && !params.has("live"));
+export const MODE_LABEL = DEMO ? "Demo in-browser" : "Local (API)";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);
@@ -23,14 +37,7 @@ async function post<T>(path: string, body?: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export interface Filtros {
-  estado?: string;
-  decision?: string;
-  analista?: string;
-  q?: string;
-}
-
-export const api = {
+const liveApi = {
   kpis: () => get<KPIs>("/kpis"),
   listar: (f: Filtros = {}) => {
     const qs = new URLSearchParams(
@@ -44,3 +51,5 @@ export const api = {
     post<Reclamacion>(`/reclamaciones/${id}/decision`, { decision, comentario }),
   reset: () => post<{ total: number }>("/reset"),
 };
+
+export const api = DEMO ? demoStore : liveApi;

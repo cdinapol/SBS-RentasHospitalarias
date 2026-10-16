@@ -46,14 +46,21 @@ export interface ResultadoDecision {
   documentos_faltantes: string[];
 }
 
+export interface ResultadoExtraccion {
+  hallazgos: HallazgoExtraccion[];
+  confianza: number;
+}
+
+export interface ResultadoValidacion {
+  checks: CheckValidacion[];
+  casos_similares: CasoSimilar[];
+  normativa: string[];
+  confianza: number;
+}
+
 export interface ResultadoPipeline {
-  extraccion: { hallazgos: HallazgoExtraccion[]; confianza: number };
-  validacion: {
-    checks: CheckValidacion[];
-    casos_similares: CasoSimilar[];
-    normativa: string[];
-    confianza: number;
-  };
+  extraccion: ResultadoExtraccion;
+  validacion: ResultadoValidacion;
   decision: ResultadoDecision;
   confianza_global: number;
 }

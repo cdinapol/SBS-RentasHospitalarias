@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig({
+// base "/SBS-RentasHospitalarias/" en build (GitHub Pages); "/" en dev.
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/SBS-RentasHospitalarias/" : "/",
   plugins: [react()],
   server: {
     port: 5173,
@@ -9,4 +11,4 @@ export default defineConfig({
       "/api": "http://127.0.0.1:8000",
     },
   },
-});
+}));
